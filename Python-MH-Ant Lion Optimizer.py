@@ -139,8 +139,8 @@ def ant_lion_optimizer(colony_size = 5, min_values = [-5,-5], max_values = [5,5]
     population = initial_population(colony_size = colony_size, min_values = min_values, max_values = max_values, target_function = target_function)
     antlions   = initial_population(colony_size = colony_size, min_values = min_values, max_values = max_values, target_function = target_function) 
     elite = np.copy(antlions[antlions[:,-1].argsort()][0,:]) 
-    while (count <= iterations):   
-        print("Iteration = ", count, " f(x) = ", elite[-1])   
+    while (count <= iterations or elite[-1]<=1e-6):   
+        #print("Iteration = ", count, " f(x) = ", elite[-1])   
         population, antlions = update_ants(population, antlions, count = count, iterations = iterations, min_values = min_values, max_values = max_values, target_function = target_function)
         population, antlions = combine(population, antlions)    
         value = np.copy(antlions[antlions[:,-1].argsort()][0,:])
